@@ -1,0 +1,360 @@
+/* todo brake point 1150 change grid values and resize */
+
+@font-face {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  src: url('/fonts/impact/impact.ttf');
+}
+
+@font-face {
+  font-family: Poppins, sans-sreif;
+  src: url('/fonts/poppins/Poppins-Regular.ttf');
+}
+
+html {
+  font-family: playfair, serif;
+  line-height: 1.71428;
+}
+
+body {
+  margin: 0;
+  font-size: 0.875rem;
+  background-color: rgb(50, 52, 54);
+}
+
+img {
+  width: 100%;
+}
+
+a {
+  color: var(--clr-2);
+}
+
+canvas {
+  border-radius: 20px;
+  box-shadow: -1px 10px 0 #3d3f42;
+}
+
+/* HELPERS */
+
+/* flex helpers */
+.grid {
+  display: grid;
+}
+.flex {
+  display: flex;
+}
+
+.flex.space-between {
+  justify-content: space-between;
+}
+
+.flex.align-center {
+  align-items: center;
+}
+
+.flex.justify-ceter {
+  justify-content: center;
+}
+
+/* latout and coms to rearrange */
+.main-layout > *:not(.full) {
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main-gallery {
+  background-color: rgb(87, 92, 97);
+  margin-inline-start: 20px;
+  margin-inline-end: 20px;
+  border-radius: 0.8rem;
+  padding: 1rem;
+}
+
+.main-gallery.grid {
+  grid-template-columns: repeat(5, 200px);
+  grid-template-rows: repeat(autofill, 200px);
+  justify-content: center;
+  grid-gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.gallery-img {
+  object-fit: cover;
+  border-radius: 3%;
+  box-shadow: -2px 2px 0 rgb(54, 49, 49);
+  cursor: pointer;
+}
+
+.main-header {
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  margin-bottom: 1.2rem;
+  border-radius: 37px;
+  background-color: #5970c1;
+  background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
+}
+
+.logo img {
+  height: 2.5rem;
+  padding: 0.5rem;
+}
+.main-nav.button {
+  cursor: pointer;
+  border: none;
+  border-radius: 50px;
+  background-color: rgb(240, 255, 255, 0);
+  color: rgb(254, 254, 254);
+  font-size: 1.2rem;
+}
+
+.main-serarch-bar {
+  margin-bottom: 1.5rem;
+}
+
+.test {
+  color: azure;
+}
+
+.controllers {
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  flex-basis: 50%;
+  background-color: #3d3f42;
+  border-radius: 20px;
+}
+
+.text-features {
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1fr 1fr;
+  /* grid-template-areas:
+  'btn1 btn2 btn3 btn4 btn5'
+  'fontsel fontsel fontsel btn5 btn6'; */
+  grid-gap: 0.9rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: #19a59f;
+  justify-items: center;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.canvas-container {
+  flex-basis: 50%;
+}
+
+.image-editor {
+  margin: auto;
+}
+
+#meme-text {
+  /* Style for "Rectangle" */
+  width: 445px;
+  height: 57px;
+  box-shadow: 1px 5px 0 #bbc4d1, inset 0 5px 0 #ffffff;
+  border-radius: 28px;
+  background-color: #ebeef3;
+  font-size: 2rem;
+  font-family: poppins;
+  text-align: center;
+}
+.line-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+  margin-inline-end: 22px;
+  cursor: pointer;
+}
+
+.font-button {
+  width: 55px;
+  height: 50px;
+  cursor: pointer;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+#font-selector {
+  width: 236px;
+  height: 50px;
+  grid-column: 1 / 4;
+  border-radius: 0.5rem;
+  font-family: poppins;
+  font-weight: bold;
+  font-size: 1.6875rem;
+  text-align: center;
+}
+
+.colorpicker {
+  background-image: url(/img/colorpicker.png);
+}
+
+.stickers-container {
+  width: 445px;
+  height: 91px;
+  border-radius: 45px;
+  background-color: #ffffff;
+  justify-content: space-around;
+}
+
+.sticker-btn {
+  all: unset;
+  height: 70px;
+  width: 77px;
+  border-radius: 25px;
+}
+
+.main-search-input {
+  width: 25rem;
+  height: 3rem;
+  background-color: #22252c;
+  border-radius: 29px;
+}
+
+#search {
+  all: unset;
+  background-color: #22252c;
+  font-family: poppins;
+  font-size: 1.45rem;
+  color: #fefefe;
+  text-align: center;
+  border-radius: 29px;
+}
+
+.main-search-input.btn {
+  background-image: url(img/search.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+.main-search.keywords {
+  width: 536px;
+  height: 50px;
+  box-shadow: 0 3px 6px 1px rgba(0, 0, 0, 0.15);
+  border-radius: 25px;
+  background-color: #5d5656;
+  color: rgb(255, 255, 255);
+  font-family: Poppins;
+  font-size: 25px;
+  font-weight: 400;
+  text-align: center;
+}
+
+#meme-text {
+  /* Style for "Rectangle" */
+  width: 445px;
+  height: 57px;
+  box-shadow: 1px 5px 0 #bbc4d1, inset 0 5px 0 #ffffff;
+  border-radius: 28px;
+  background-color: #ebeef3;
+  font-size: 2rem;
+  font-family: poppins;
+  text-align: center;
+}
+.line-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+  margin-inline-end: 22px;
+  cursor: pointer;
+}
+
+.font-button {
+  width: 55px;
+  height: 50px;
+  cursor: pointer;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+#font-selector {
+  width: 236px;
+  height: 50px;
+  grid-column: 1 / 4;
+  border-radius: 0.5rem;
+  font-family: poppins;
+  font-weight: bold;
+  font-size: 1.6875rem;
+  text-align: center;
+}
+
+.colorpicker {
+  background-image: url(/img/colorpicker.png);
+}
+
+.stickers-container {
+  width: 445px;
+  height: 91px;
+  border-radius: 45px;
+  background-color: #ffffff;
+  justify-content: space-around;
+}
+
+.sticker-btn {
+  all: unset;
+  height: 70px;
+  width: 77px;
+  border-radius: 25px;
+}
+
+.main-search-input {
+  width: 25rem;
+  height: 3rem;
+  background-color: #22252c;
+  border-radius: 29px;
+}
+
+#search {
+  all: unset;
+  background-color: #22252c;
+  font-family: poppins;
+  font-size: 1.45rem;
+  color: #fefefe;
+  text-align: center;
+  border-radius: 29px;
+}
+
+.main-search-input.btn {
+  background-image: url(/img/search.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+.main-search.keywords {
+  width: 536px;
+  height: 50px;
+  box-shadow: 0 3px 6px 1px rgba(0, 0, 0, 0.15);
+  border-radius: 25px;
+  background-color: #5d5656;
+  color: rgb(255, 255, 255);
+  font-family: Poppins;
+  font-size: 25px;
+  font-weight: 400;
+  text-align: center;
+}
+
+@media (max-width: 1150px) {
+  body {
+    font-size: 14px;
+  }
+  .main-layout > *:not(.full) {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .main-gallery.grid {
+    grid-template-columns: unset;
+    grid-template-columns: repeat(auto-fill, 200px);
+    grid-gap: 1rem;
+    margin-bottom: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .image-editor {
+    flex-direction: column;
+    align-items: center;
+  }
+}

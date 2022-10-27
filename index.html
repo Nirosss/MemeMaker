@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meme-Maker</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body onload="onInit()">
+    <header
+      class="main-header flex align-center full main-layout space-between align-center"
+    >
+      <div class="logo flex align-center">
+        <img src="img/LOGO.png" alt="" />
+      </div>
+      <div class="main-header-container flex space-between align-center">
+        <nav class="main-nav">
+          <!-- Todo: clean buttons -->
+          <button
+            class="main-nav button"
+            type="btn"
+            onclick="onSwitchView('gallery')"
+          >
+            Gallery
+          </button>
+          <button
+            class="main-nav button"
+            type="btn"
+            onclick="onSwitchView('memes')"
+          >
+            Memes
+          </button>
+          <button
+            class="main-nav button"
+            type="btn"
+            onclick="onSwitchView('about')"
+          >
+            About
+          </button>
+        </nav>
+      </div>
+    </header>
+    <main class="main-gallery main-layout">
+      <section class="main-serarch-bar flex space-between main-layout">
+        <form onsubmit="preventRefresh(event)" class="main-search-input flex">
+          <input
+            id="search"
+            type="text"
+            placeholder="Type a keyword here"
+            onchange="onSearch(this.value)"
+          />
+          <button type="submit" class="main-search-input btn"></button>
+        </form>
+        <div class="main-search keywords">
+          sample sample sample sample
+          <!-- keywords come here -->
+        </div>
+      </section>
+      <section class="main-gallery main-layout grid">
+        <!-- images come are -->
+      </section>
+    </main>
+    <main class="image-editor main-layout" hidden>
+      <section class="image-editor flex">
+        <div class="canvas-container">
+          <canvas
+            id="my-canvas"
+            height="450"
+            width="450"
+            onclick="test(event)"
+          ></canvas>
+        </div>
+        <div class="controllers flex">
+          <input
+            id="meme-text"
+            type="text"
+            placeholder=""
+            oninput="onTextInput(this.value)"
+          />
+          <div class="line-text-buttons flex">
+            <button
+              class="line-button toggle"
+              type="button"
+              onclick="onToggleLine()"
+              style="background: url(img/toggleline.png)"
+            ></button>
+            <button
+              class="line-button add"
+              type="button"
+              onclick="onAddLine()"
+              style="background: url(img/addline.png)"
+            ></button>
+            <button
+              class="line-button delete"
+              onclick="onDeleteLine()"
+              type="button"
+              style="background: url(img/trash.png)"
+            ></button>
+          </div>
+          <div class="text-features grid">
+            <button
+              class="font-button size-up"
+              onclick="onFontChange('fontSize',2)"
+              style="background: url(img/sizeup.png)"
+            ></button>
+            <button
+              class="font-button size-down"
+              onclick="onFontChange('fontSize',-2)"
+              style="background: url(img/sizedown.png)"
+            ></button>
+            <button
+              class="font-button align-left"
+              onclick="onFontChange('left')"
+              style="background: url(img/left.png)"
+            ></button>
+            <button
+              class="font-button align-center"
+              onclick="onFontChange('center')"
+              style="background: url(img/center.png)"
+            ></button>
+            <button
+              class="font-button align-right"
+              onclick="onFontChange('right')"
+              style="background: url(img/right.png)"
+            ></button>
+            <select name="font" id="font-selector">
+              <option value="impact">IMPACT</option>
+              <option value="david">DAVID</option>
+              <option value="benny">BENNY</option>
+            </select>
+            <button
+              class="font-button underline"
+              onclick="onFontChange('underline')"
+              style="background: url(img/underline.png)"
+            ></button>
+            <input
+              class="font-button colorpicker"
+              type="color"
+              oninput="onFontChange('color',this.value)"
+              value="#ffffff"
+            />
+          </div>
+          <div class="stickers-container flex align-center">
+            <button
+              class="sticker-btn"
+              style="background: url(img/stickers/002.png)"
+            ></button>
+            <button
+              class="sticker-btn"
+              style="background: url(img/stickers/002.png)"
+            ></button>
+            <button
+              class="sticker-btn"
+              style="background: url(img/stickers/003.png)"
+            ></button>
+            <button
+              class="sticker-btn"
+              style="background: url(img/stickers/004.png)"
+            ></button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <main class="about" hidden>
+      <h1 class="test">THIS SHIT WAS MADE BY ME</h1>
+    </main>
+    <script src="js/main.js"></script>
+    <script src="js/services.js"></script>
+  </body>
+</html>
