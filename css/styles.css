@@ -281,7 +281,7 @@ canvas {
 }
 
 .colorpicker {
-  background-image: url(/img/colorpicker.png);
+  background-image: url(../img/colorpicker.png);
 }
 
 .stickers-container {
@@ -317,7 +317,7 @@ canvas {
 }
 
 .main-search-input.btn {
-  background-image: url(/img/search.png);
+  background-image: url(../img/search.png);
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
