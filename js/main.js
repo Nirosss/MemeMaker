@@ -71,6 +71,7 @@ function renderMeme(img, text = '') {
 }
 
 function onTextInput(text) {
+  gIsforDownload = false
   renderMeme(gSelectedImg, updateMeme(text))
 }
 
@@ -241,7 +242,6 @@ function onDownloadCanvas(elLink) {
   renderMeme(gSelectedImg)
   const data = gElCanvas.toDataURL()
   elLink.href = data
-  elLink.download = `${answer}.png`
-  gIsforDownload = false
+  elLink.download = `your-meme.png`
   renderMeme(gSelectedImg)
 }
