@@ -76,14 +76,16 @@ function addLine() {
   if (gMeme.lines.length >= 3) return
   gMeme.selectedLineIdx++
   gMeme.lines.push({
-    txt: '',
+    txt: 'Your text here',
     size: gTextProperties.fontSize,
     align: gTextProperties.align,
     color: gTextProperties.fillColor,
   })
-  const input = document.getElementById('meme-text')
-  input.value = ''
-  input.placeholder = ''
+  // const input = document.getElementById('meme-text')
+
+  // input.placeholder = ''
+  // drawRect(gMeme.selectedLineIdx, 225, 40, center)
+  renderMeme(gSelectedImg)
 }
 
 function deleteLine() {

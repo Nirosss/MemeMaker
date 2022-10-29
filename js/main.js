@@ -2,6 +2,7 @@
 let gElCanvas
 let gCtx
 let gSelectedImg
+var gSelectedSticker
 
 gElCanvas = document.getElementById('my-canvas')
 gCtx = gElCanvas.getContext('2d')
@@ -62,6 +63,11 @@ function renderMeme(img, text = '') {
   meme.src = `meme-imgs-sqr/${img}.jpg`
   meme.onload = () => {
     gCtx.drawImage(meme, 0, 0, gElCanvas.width, gElCanvas.height)
+    if (gSelectedSticker) {
+      var sticker = new Image()
+      sticker.src = `img/stickers/${gSelectedSticker}`
+      gCtx.drawImage(sticker, 380, 380, 65, 65)
+    }
     drawText(gMeme.lines[gMeme.selectedLineIdx].txt)
     const input = document.getElementById('meme-text')
     input.placeholder = '' || gMeme.lines[gMeme.selectedLineIdx].txt
@@ -75,17 +81,17 @@ function onTextInput(text) {
 function drawText(text) {
   const { fontSize, font, fillColor, strokeColor, align, underline } =
     gTextProperties
-  let text2 = ''
-  let text3 = ''
   const [line1, line2, line3] = gMeme.lines
   let text1 = line1.txt
+  let text2 = ''
+  let text3 = ''
   if (gMeme.lines.length > 1) text2 = line2.txt
   if (gMeme.lines.length > 2) text3 = line3.txt
-  // there should be a shorter way
+  // there should be a shorter way. todo give each line text prop
   gCtx.lineWidth = 2
+  gCtx.font = `${fontSize}px ${font}`
   gCtx.strokeStyle = strokeColor
   gCtx.fillStyle = fillColor
-  gCtx.font = `${fontSize}px ${font}`
   let { width } = gCtx.measureText(text)
   let pos = getPosition(align)
   gCtx.textAlign = align
@@ -131,6 +137,11 @@ function onFontChange(property, val = 0) {
       gTextProperties.align = 'right'
       gMeme.lines[gMeme.selectedLineIdx].align = 'right' // todo Update all changes to line level
       renderMeme(gSelectedImg)
+      break
+    case 'font':
+      gTextProperties.font = val
+      renderMeme(gSelectedImg)
+      break
   }
 }
 
@@ -156,7 +167,6 @@ function getPosition(alignment) {
       posX = gElCanvas.width - 2
       break
   }
-
   return posX
 }
 
@@ -177,12 +187,12 @@ function getImages() {
 }
 
 function onToggleLine() {
+  const input = document.getElementById('meme-text')
+  input.value = ''
   gMeme.selectedLineIdx === gMeme.lines.length - 1
     ? (gMeme.selectedLineIdx = 0)
     : gMeme.selectedLineIdx++
-  const input = document.getElementById('meme-text')
-  input.value = gMeme.lines[gMeme.selectedLineIdx].txt
-  input.placeholder = gMeme.lines[gMeme.selectedLineIdx].txt
+  input.placeholder = '' || gMeme.lines[gMeme.selectedLineIdx].txt
   renderMeme(gSelectedImg)
 }
 
@@ -191,12 +201,12 @@ function preventRefresh(ev) {
 }
 
 function drawRect(lineIdx, pos, width, fontSize, align) {
-  gCtx.strokeStyle = 'white'
+  gCtx.strokeStyle = 'Yellow'
   switch (lineIdx) {
     case 0:
       gCtx.strokeRect(
         alignRect(align, pos, width),
-        80,
+        75,
         width + 20,
         -(fontSize + 20)
       )
@@ -204,7 +214,7 @@ function drawRect(lineIdx, pos, width, fontSize, align) {
     case 1:
       gCtx.strokeRect(
         alignRect(align, pos, width),
-        420,
+        415,
         width + 20,
         -(fontSize + 20)
       )
@@ -212,10 +222,26 @@ function drawRect(lineIdx, pos, width, fontSize, align) {
     case 2:
       gCtx.strokeRect(
         alignRect(align, pos, width),
-        245,
+        240,
         width + 20,
         -(fontSize + 20)
       )
       break
   }
+}
+
+function toggleMenu() {
+  document.body.classList.toggle('menu-open')
+}
+
+function onAddSticker(sticker) {
+  console.log(sticker)
+  gSelectedSticker = sticker
+  renderMeme(gSelectedImg)
+}
+
+function downloadCanvas(elLink) {
+  const data = gElCanvas.toDataURL()
+  elLink.href = data
+  elLink.download = 'my-img.jpg'
 }

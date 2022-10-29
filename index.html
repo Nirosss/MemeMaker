@@ -18,48 +18,57 @@
         <nav class="main-nav">
           <!-- Todo: clean buttons -->
           <button
-            class="main-nav button"
+            class="main-nav-button"
             type="btn"
             onclick="onSwitchView('gallery')"
           >
             Gallery
           </button>
           <button
-            class="main-nav button"
+            class="main-nav-button"
             type="btn"
             onclick="onSwitchView('memes')"
           >
             Memes
           </button>
           <button
-            class="main-nav button"
+            class="main-nav-button"
             type="btn"
             onclick="onSwitchView('about')"
           >
             About
           </button>
         </nav>
+        <button
+          type="button"
+          class="burger-btn-menu"
+          onclick="toggleMenu()"
+          style="background-image: url(img/burger.png)"
+        ></button>
       </div>
     </header>
     <main class="main-gallery main-layout">
       <section class="main-serarch-bar flex space-between main-layout">
         <form onsubmit="preventRefresh(event)" class="main-search-input flex">
-          <input
-            id="search"
-            type="text"
-            placeholder="Type a keyword here"
-            onchange="onSearch(this.value)"
-          />
+          <input list="img-keyword" id="image-fliter" name="image-slector" />
+          <datalist id="img-keyword">
+            <option value="animals"></option>
+            <option value="baby"></option>
+            <option value="cat"></option>
+            <option value="crazy"></option>
+            <option value="fat"></option>
+            <option value="funny"></option>
+            <option value="happy"></option>
+            <option value="politics"></option>
+            <option value="sarcastic"></option>
+          </datalist>
           <button
             type="submit"
             class="main-search-input btn"
             style="background-image: url(img/search.png)"
           ></button>
         </form>
-        <div class="main-search keywords">
-          sample sample sample sample
-          <!-- keywords come here -->
-        </div>
+        <div class="main-search keywords">Keywords will come here</div>
       </section>
       <section class="main-gallery main-layout grid">
         <!-- images come are -->
@@ -128,41 +137,68 @@
               onclick="onFontChange('right')"
               style="background: url(img/right.png)"
             ></button>
-            <select name="font" id="font-selector">
+            <select
+              name="font"
+              id="font-selector"
+              onchange="onFontChange('font',this.value)"
+            >
               <option value="impact">IMPACT</option>
-              <option value="david">DAVID</option>
-              <option value="benny">BENNY</option>
+              <option value="poppins">POPPINS</option>
+              <option value="Lucida Sans">BENNY</option>
             </select>
             <button
               class="font-button underline"
               onclick="onFontChange('underline')"
               style="background: url(img/underline.png)"
             ></button>
-            <input
-              class="font-button colorpicker"
-              type="color"
-              oninput="onFontChange('color',this.value)"
-              value="#ffffff"
-            />
+            <button
+              class="font-button colorpicker-container"
+              style="background-image: url(/img/colorpicker.png)"
+            >
+              <input
+                class="font-button colorpicker"
+                type="color"
+                oninput="onFontChange('color',this.value)"
+                value="#ffffff"
+              />
+            </button>
           </div>
           <div class="stickers-container flex align-center">
             <button
               class="sticker-btn"
-              style="background: url(img/stickers/002.png)"
+              style="background: url(img/stickers/sticker001.png)"
+              onclick="onAddSticker('sticker001.png')"
             ></button>
             <button
               class="sticker-btn"
-              style="background: url(img/stickers/002.png)"
+              style="background: url(img/stickers/sticker002.png)"
+              onclick="onAddSticker('sticker002.png')"
             ></button>
             <button
               class="sticker-btn"
-              style="background: url(img/stickers/003.png)"
+              style="background: url(img/stickers/sticker003.png)"
+              onclick="onAddSticker('sticker003.png')"
             ></button>
             <button
               class="sticker-btn"
-              style="background: url(img/stickers/004.png)"
+              style="background: url(img/stickers/sticker004.png)"
+              onclick="onAddSticker('sticker004.png')"
+            ></button>
+            <button
+              class="sticker-btn"
+              style="background: url(img/stickers/sticker005.png)"
+              onclick="onAddSticker('sticker005.png')"
+            ></button>
+            <button
+              class="sticker-btn"
+              style="background: url(img/stickers/sticker006.png)"
+              onclick="onAddSticker('sticker006.png')"
             ></button>
           </div>
+          <section class="content-use container">
+            <button>Share</button>
+            <button>Download</button>
+          </section>
         </div>
       </section>
     </main>

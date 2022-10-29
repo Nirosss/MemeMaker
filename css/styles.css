@@ -7,11 +7,11 @@
 
 @font-face {
   font-family: Poppins, sans-sreif;
-  src: url('/fonts/poppins/Poppins-Regular.ttf');
+  src: url('/fonts/poppins/Poppins-ExtraBold.ttf');
 }
 
-html {
-  font-family: playfair, serif;
+* {
+  font-family: Poppins;
   line-height: 1.71428;
 }
 
@@ -34,7 +34,17 @@ canvas {
   box-shadow: -1px 10px 0 #3d3f42;
 }
 
+#image-fliter {
+  all: unset;
+  color: #19a59f;
+}
+
 /* HELPERS */
+.clean-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
 
 /* flex helpers */
 .grid {
@@ -57,6 +67,11 @@ canvas {
 }
 
 /* latout and coms to rearrange */
+
+.burger-btn-menu {
+  display: none;
+}
+
 .main-layout > *:not(.full) {
   max-width: 1080px;
   margin-left: auto;
@@ -99,7 +114,8 @@ canvas {
   height: 2.5rem;
   padding: 0.5rem;
 }
-.main-nav.button {
+
+.main-nav-button {
   cursor: pointer;
   border: none;
   border-radius: 50px;
@@ -119,7 +135,7 @@ canvas {
 .controllers {
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-basis: 50%;
   background-color: #3d3f42;
   border-radius: 20px;
@@ -132,7 +148,6 @@ canvas {
   'btn1 btn2 btn3 btn4 btn5'
   'fontsel fontsel fontsel btn5 btn6'; */
   grid-gap: 0.9rem;
-  margin-bottom: 1rem;
   padding: 1rem;
   background-color: #19a59f;
   justify-items: center;
@@ -156,23 +171,7 @@ canvas {
   border-radius: 28px;
   background-color: #ebeef3;
   font-size: 2rem;
-  font-family: poppins;
   text-align: center;
-}
-.line-button {
-  width: 60px;
-  height: 60px;
-  border-radius: 4px;
-  margin-inline-end: 22px;
-  cursor: pointer;
-}
-
-.font-button {
-  width: 55px;
-  height: 50px;
-  cursor: pointer;
-  border: none;
-  border-radius: 0.5rem;
 }
 
 #font-selector {
@@ -192,17 +191,18 @@ canvas {
 
 .stickers-container {
   width: 445px;
-  height: 91px;
+  height: 5em;
   border-radius: 45px;
   background-color: #ffffff;
   justify-content: space-around;
 }
 
-.sticker-btn {
-  all: unset;
-  height: 70px;
-  width: 77px;
-  border-radius: 25px;
+.content-use > button {
+  width: 213px;
+  height: 51px;
+  box-shadow: inset 0 5px 0 #ffffff;
+  border-radius: 15px;
+  background-color: #1e7cd3;
 }
 
 .main-search-input {
@@ -210,6 +210,7 @@ canvas {
   height: 3rem;
   background-color: #22252c;
   border-radius: 29px;
+  justify-content: space-between;
 }
 
 #search {
@@ -224,8 +225,8 @@ canvas {
 
 .main-search-input.btn {
   background-repeat: no-repeat;
-  background-position: center;
   cursor: pointer;
+  flex-basis: 20%;
 }
 
 .main-search.keywords {
@@ -241,28 +242,18 @@ canvas {
   text-align: center;
 }
 
-#meme-text {
-  /* Style for "Rectangle" */
-  width: 445px;
-  height: 57px;
-  box-shadow: 1px 5px 0 #bbc4d1, inset 0 5px 0 #ffffff;
-  border-radius: 28px;
-  background-color: #ebeef3;
-  font-size: 2rem;
-  font-family: poppins;
-  text-align: center;
-}
 .line-button {
-  width: 60px;
-  height: 60px;
+  width: 3.75rem;
+  height: 3.75rem;
   border-radius: 4px;
   margin-inline-end: 22px;
   cursor: pointer;
+  background-color: #3d3f42;
 }
 
 .font-button {
-  width: 55px;
-  height: 50px;
+  width: 3.4375rem;
+  height: 3.125rem;
   cursor: pointer;
   border: none;
   border-radius: 0.5rem;
@@ -280,22 +271,20 @@ canvas {
 }
 
 .colorpicker {
-  background-image: url(/img/colorpicker.png);
-}
-
-.stickers-container {
-  width: 445px;
-  height: 91px;
-  border-radius: 45px;
-  background-color: #ffffff;
-  justify-content: space-around;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
 }
 
 .sticker-btn {
   all: unset;
-  height: 70px;
-  width: 77px;
+  height: 3.5em;
+  width: 3.7em;
   border-radius: 25px;
+  background-position: center;
 }
 
 .main-search-input {
@@ -322,19 +311,6 @@ canvas {
   cursor: pointer;
 }
 
-.main-search.keywords {
-  width: 536px;
-  height: 50px;
-  box-shadow: 0 3px 6px 1px rgba(0, 0, 0, 0.15);
-  border-radius: 25px;
-  background-color: #5d5656;
-  color: rgb(255, 255, 255);
-  font-family: Poppins;
-  font-size: 25px;
-  font-weight: 400;
-  text-align: center;
-}
-
 @media (max-width: 1150px) {
   body {
     font-size: 14px;
@@ -356,4 +332,103 @@ canvas {
     flex-direction: column;
     align-items: center;
   }
+  .controllers {
+    justify-content: space-evenly;
+  }
+  #meme-text {
+    width: 445px;
+    height: 45px;
+    box-shadow: none;
+  }
+  .line-text-buttons.flex > button {
+    margin-top: 3px;
+    margin-bottom: 3px;
+  }
+  .text-features {
+    grid-gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .main-layout > *:not(.full) {
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .burger-btn-menu {
+    display: block;
+    height: 3.75rem;
+    width: 3.75rem;
+    border-radius: 4rem;
+    border: none;
+    position: absolute;
+    right: 3%;
+  }
+
+  .main-gallery.grid {
+    grid-template-columns: unset;
+    grid-template-columns: repeat(auto-fill, 180px);
+    grid-gap: 1rem;
+    margin-bottom: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .text-features {
+    grid-gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+  }
+  .main-nav {
+    position: fixed;
+    background-color: #5970c1;
+    background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
+    height: 100vh;
+    border-inline-start: 1px solid #ccc;
+    inset: auto 0 0 auto;
+    min-width: 200px;
+    transform: translateX(100%);
+    transition: transform 0.6s, box-shadow 0.6s;
+    border-radius: 2rem;
+  }
+
+  body.menu-open .main-nav {
+    transform: translateX(0);
+    box-shadow: -9px 0px 14px rgb(0 0 0 / 30%);
+  }
+
+  .main-nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  .main-nav-button {
+    font-size: 1.5rem;
+    display: block;
+    padding: 3rem;
+  }
+  .main-serarch-bar {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .main-search.keywords {
+    width: 20rem;
+    margin-top: 1rem;
+    margin-bottom: none;
+  }
+  .main-search-input {
+    width: 20rem;
+    margin-top: 1rem;
+    margin-bottom: none;
+  }
+  .main-search-input.btn {
+    display: none;
+  }
+}
+
+.font-button.colorpicker-container {
+  position: relative;
 }
