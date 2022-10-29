@@ -1,8 +1,9 @@
 'use strict'
-let gElCanvas
-let gCtx
-let gSelectedImg
+var gElCanvas
+var gCtx
+var gSelectedImg
 var gSelectedSticker
+var gIsforDownload = false
 
 gElCanvas = document.getElementById('my-canvas')
 gCtx = gElCanvas.getContext('2d')
@@ -23,10 +24,6 @@ function renderGallery(images) {
     `
   )
   document.querySelector('.main-gallery.grid').innerHTML = strHtml.join('')
-}
-
-function test(that) {
-  console.log(that)
 }
 
 function onImgClicked(img) {
@@ -52,7 +49,6 @@ function onSwitchView(val) {
     document.querySelector('.image-editor').setAttribute('hidden', true)
     document.querySelector('.main-gallery').setAttribute('hidden', true)
     document.querySelector('.about').setAttribute('hidden', true)
-    console.log(val)
     resetTextProp()
   }
 }
@@ -107,11 +103,11 @@ function drawText(text) {
     else if (align === 'center') gCtx.fillRect(pos - width / 2, posY, width, 2)
     else if (align === 'right') gCtx.fillRect(pos - width, posY, width, 2)
   }
+  if (gIsforDownload) return
   drawRect(gMeme.selectedLineIdx, pos, width, fontSize, align)
 }
 
 function onFontChange(property, val = 0) {
-  console.log(property)
   switch (property) {
     case 'fontSize':
       gTextProperties.fontSize += val
@@ -201,7 +197,7 @@ function preventRefresh(ev) {
 }
 
 function drawRect(lineIdx, pos, width, fontSize, align) {
-  gCtx.strokeStyle = 'Yellow'
+  gCtx.strokeStyle = '#8ca9c5'
   switch (lineIdx) {
     case 0:
       gCtx.strokeRect(
@@ -235,13 +231,17 @@ function toggleMenu() {
 }
 
 function onAddSticker(sticker) {
-  console.log(sticker)
   gSelectedSticker = sticker
   renderMeme(gSelectedImg)
 }
 
-function downloadCanvas(elLink) {
+function onDownloadCanvas(elLink) {
+  // todo find a way to asynch it so render will finish before download
+  gIsforDownload = true
+  renderMeme(gSelectedImg)
   const data = gElCanvas.toDataURL()
   elLink.href = data
-  elLink.download = 'my-img.jpg'
+  elLink.download = `${answer}.png`
+  gIsforDownload = false
+  renderMeme(gSelectedImg)
 }

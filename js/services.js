@@ -68,7 +68,8 @@ function resetTextProp() {
     font: 'Impact',
     fillColor: '#ffffff',
     strokeColor: '#000000',
-    alignment: 'center',
+    align: 'center',
+    underline: false,
   }
 }
 
@@ -114,4 +115,9 @@ function alignUnderLine(LineIdx) {
       break
   }
   return posY
+}
+
+function uploadImg() {
+  alert('Nehhh Not Today')
+  console.log('Not Today')
 }

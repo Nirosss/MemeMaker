@@ -75,7 +75,7 @@
       </section>
     </main>
     <main class="image-editor main-layout" hidden>
-      <section class="image-editor flex">
+      <div class="image-editor flex">
         <div class="canvas-container">
           <canvas
             id="my-canvas"
@@ -85,12 +85,14 @@
           ></canvas>
         </div>
         <div class="controllers flex">
-          <input
-            id="meme-text"
-            type="text"
-            placeholder=""
-            oninput="onTextInput(this.value)"
-          />
+          <div class="input-containter">
+            <input
+              id="meme-text"
+              type="text"
+              placeholder=""
+              oninput="onTextInput(this.value)"
+            />
+          </div>
           <div class="line-text-buttons flex">
             <button
               class="line-button toggle"
@@ -143,8 +145,8 @@
               onchange="onFontChange('font',this.value)"
             >
               <option value="impact">IMPACT</option>
-              <option value="poppins">POPPINS</option>
-              <option value="Lucida Sans">BENNY</option>
+              <option value="arial">ARIAL</option>
+              <option value="Times">TIMES</option>
             </select>
             <button
               class="font-button underline"
@@ -195,12 +197,23 @@
               onclick="onAddSticker('sticker006.png')"
             ></button>
           </div>
-          <section class="content-use container">
-            <button>Share</button>
-            <button>Download</button>
-          </section>
+          <div class="content-use container">
+            <button class="content-use button share" onclick="uploadImg()">
+              Share
+            </button>
+            <button class="content-use button download">
+              <a
+                id="download-link"
+                href="#"
+                onclick="onDownloadCanvas(this)"
+                download=""
+                >Download</a
+              >
+            </button>
+            <!--should find a way that the link works on the button  -->
+          </div>
         </div>
-      </section>
+      </div>
     </main>
     <main class="about" hidden>
       <h1 class="test">THIS SHIT WAS MADE BY ME</h1>

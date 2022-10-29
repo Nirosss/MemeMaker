@@ -31,7 +31,7 @@ a {
 
 canvas {
   border-radius: 20px;
-  box-shadow: -1px 10px 0 #3d3f42;
+  box-shadow: -1px 8px 0 #3d3f42;
 }
 
 #image-fliter {
@@ -65,8 +65,6 @@ canvas {
 .flex.justify-ceter {
   justify-content: center;
 }
-
-/* latout and coms to rearrange */
 
 .burger-btn-menu {
   display: none;
@@ -128,10 +126,6 @@ canvas {
   margin-bottom: 1.5rem;
 }
 
-.test {
-  color: azure;
-}
-
 .controllers {
   flex-direction: column;
   align-items: center;
@@ -189,20 +183,33 @@ canvas {
   background-image: url(/img/colorpicker.png);
 }
 
-.stickers-container {
-  width: 445px;
-  height: 5em;
-  border-radius: 45px;
-  background-color: #ffffff;
-  justify-content: space-around;
+.font-button.colorpicker-container {
+  position: relative;
 }
 
-.content-use > button {
+.stickers-container {
+  width: 445px;
+  height: 3.5em;
+  border-radius: 45px;
+  background-color: #ffffff;
+  justify-content: space-evenly;
+}
+
+.content-use a {
+  all: unset;
+}
+
+.content-use > .button {
   width: 213px;
   height: 51px;
-  box-shadow: inset 0 5px 0 #ffffff;
+  box-shadow: inset 0 2px 5px 0 #ffffff;
   border-radius: 15px;
   background-color: #1e7cd3;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 21px;
+  font-weight: 500;
+  font-style: normal;
 }
 
 .main-search-input {
@@ -287,11 +294,8 @@ canvas {
   background-position: center;
 }
 
-.main-search-input {
-  width: 25rem;
-  height: 3rem;
-  background-color: #22252c;
-  border-radius: 29px;
+#download-link {
+  background-color: #1e7cd3;
 }
 
 #search {
@@ -333,7 +337,7 @@ canvas {
     align-items: center;
   }
   .controllers {
-    justify-content: space-evenly;
+    justify-content: space-between;
   }
   #meme-text {
     width: 445px;
@@ -351,13 +355,22 @@ canvas {
   }
 }
 
+@media (max-width: 750px) {
+  .main-serarch-bar {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
 @media (max-width: 680px) {
   .main-layout > *:not(.full) {
     max-width: 450px;
     margin-left: auto;
     margin-right: auto;
   }
-
+  .main-header {
+    margin-bottom: 0.5rem;
+  }
   .burger-btn-menu {
     display: block;
     height: 3.75rem;
@@ -427,8 +440,4 @@ canvas {
   .main-search-input.btn {
     display: none;
   }
-}
-
-.font-button.colorpicker-container {
-  position: relative;
 }
