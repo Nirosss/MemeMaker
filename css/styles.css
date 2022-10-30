@@ -37,6 +37,7 @@ canvas {
 #image-fliter {
   all: unset;
   color: #19a59f;
+  flex-basis: 80%;
 }
 
 /* HELPERS */
@@ -86,13 +87,13 @@ canvas {
 
 .main-gallery.grid {
   grid-template-columns: repeat(5, 200px);
-  grid-template-rows: repeat(autofill, 200px);
+  grid-template-rows: minmax(200px);
   justify-content: center;
   grid-gap: 1rem;
   margin-bottom: 2rem;
   overflow: visible;
   overflow-x: hidden;
-  height: 70vh;
+  max-height: 70vh;
 }
 
 /* width */
@@ -121,7 +122,7 @@ canvas {
 .gallery-img {
   object-fit: cover;
   border-radius: 3%;
-  box-shadow: -2px 2px 0 rgb(54, 49, 49);
+  box-shadow: -1px 1px 0 rgba(64, 61, 61, 0.613);
   cursor: pointer;
 }
 
@@ -499,4 +500,15 @@ canvas {
 
 .test {
   color: #ebeef3;
+}
+
+.clear-btn {
+  all: unset;
+  color: #33be6d;
+  font-size: 1.3rem;
+  border: 1px solid #19a59f;
+  border-radius: 4px;
+  padding-left: 3px;
+  padding-right: 3px;
+  cursor: pointer;
 }

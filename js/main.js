@@ -13,7 +13,7 @@ function onInit() {
   gElCanvas = document.getElementById('my-canvas')
   gCtx = gElCanvas.getContext('2d')
   renderGallery()
-  addListeners()
+  // addListeners()
 }
 
 function renderGallery(images) {
@@ -175,7 +175,7 @@ function onSearch(text) {
   let images = gImgs
   if (gfilter) {
     images = gImgs.filter((image) =>
-      image.keywords.includes(gfilter.toLowerCase())
+      image.keywords.some((keyword) => keyword.includes(gfilter.toLowerCase()))
     )
   }
   renderGallery(images)
@@ -332,3 +332,10 @@ function getCanvasToDownload(quality) {
   renderMeme(gSelectedImg)
   return gElCanvas.toDataURL('image/jpeg', quality)
 }
+
+function onClearSerach() {
+  var clearSearch = document.getElementById('image-fliter')
+  clearSearch.value= ''
+  onSearch(clearSearch.value)
+}
+

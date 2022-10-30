@@ -50,7 +50,19 @@
     <main class="main-gallery main-layout">
       <section class="main-serarch-bar flex space-between main-layout">
         <form onsubmit="preventRefresh(event)" class="main-search-input flex">
-          <input list="img-keyword" id="image-fliter" name="image-slector" />
+          <input
+            list="img-keyword"
+            id="image-fliter"
+            name="image-slector"
+            oninput="onSearch(this.value)"
+          />
+          <button
+            class="image-filter clear-btn"
+            onclick="onClearSerach()"
+            title="Click to reset"
+          >
+            X
+          </button>
           <datalist id="img-keyword">
             <option value="animals"></option>
             <option value="baby"></option>
@@ -87,6 +99,7 @@
         <div class="controllers flex">
           <div class="input-containter">
             <input
+              autocomplete="off"
               id="meme-text"
               type="text"
               placeholder=""
