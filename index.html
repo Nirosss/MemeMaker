@@ -91,6 +91,7 @@
               type="text"
               placeholder=""
               oninput="onTextInput(this.value)"
+              autofocus
             />
           </div>
           <div class="line-text-buttons flex">
@@ -202,11 +203,7 @@
               Share
             </button>
             <button class="content-use button download">
-              <a
-                id="download-link"
-                href="#"
-                onclick="onDownloadCanvas(this)"
-                download=""
+              <a id="download-link" href="#" onclick="onDownloadCanvas(this)"
                 >Download</a
               >
             </button>
@@ -216,7 +213,11 @@
       </div>
     </main>
     <main class="about" hidden>
-      <h1 class="test">THIS SHIT WAS MADE BY ME</h1>
+      <h1 class="test">THIS WAS MADE BY THE STAKE</h1>
+      <div
+        class="about-img"
+        style="background-image: url(/img/proof-of-stake.jpg)"
+      ></div>
     </main>
     <script src="js/main.js"></script>
     <script src="js/services.js"></script>

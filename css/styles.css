@@ -71,7 +71,7 @@ canvas {
 }
 
 .main-layout > *:not(.full) {
-  max-width: 1080px;
+  max-width: 1100px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -90,6 +90,32 @@ canvas {
   justify-content: center;
   grid-gap: 1rem;
   margin-bottom: 2rem;
+  overflow: visible;
+  overflow-x: hidden;
+  height: 70vh;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 13px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-clip: content-box;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  width: 13px;
+  border-radius: 7px;
+  background-color: #22252c;
+  background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-image: linear-gradient(-86deg, #33be6d 0%, #4ea8bc 100%);
 }
 
 .gallery-img {
@@ -119,7 +145,7 @@ canvas {
   border-radius: 50px;
   background-color: rgb(240, 255, 255, 0);
   color: rgb(254, 254, 254);
-  font-size: 1.2rem;
+  font-size: 1.6rem;
 }
 
 .main-serarch-bar {
@@ -179,10 +205,6 @@ canvas {
   text-align: center;
 }
 
-.colorpicker {
-  background-image: url(img/colorpicker.png);
-}
-
 .font-button.colorpicker-container {
   position: relative;
 }
@@ -232,6 +254,7 @@ canvas {
 
 .main-search-input.btn {
   background-repeat: no-repeat;
+  border: none;
   cursor: pointer;
   flex-basis: 20%;
 }
@@ -284,6 +307,7 @@ canvas {
   top: 0;
   left: 0;
   opacity: 0;
+  z-index: 1;
 }
 
 .sticker-btn {
@@ -320,7 +344,7 @@ canvas {
     font-size: 14px;
   }
   .main-layout > *:not(.full) {
-    max-width: 800px;
+    max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -352,6 +376,28 @@ canvas {
     grid-gap: 0.5rem;
     margin-bottom: 1rem;
     padding: 0.5rem;
+  }
+  .main-search.keywords {
+    width: 400px;
+    height: 50px;
+  }
+}
+@media (max-width: 940px) {
+  /* .main-search.keywords {
+    flex-basis: 40%;
+    
+  }
+  .main-serarch-input.flex{
+    width: 300px;
+  }
+.main-serarch-bar{
+  justify-content:
+} */
+
+  .main-layout > *:not(.full) {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
@@ -416,6 +462,7 @@ canvas {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    z-index: 10;
   }
 
   .main-nav-button {
@@ -440,4 +487,16 @@ canvas {
   .main-search-input.btn {
     display: none;
   }
+}
+
+.about-img {
+  margin-left: auto;
+  margin-right: auto;
+  height: 80vh;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.test {
+  color: #ebeef3;
 }

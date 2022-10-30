@@ -4,6 +4,7 @@ var gCtx
 var gSelectedImg
 var gSelectedSticker
 var gIsforDownload = false
+const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
 gElCanvas = document.getElementById('my-canvas')
 gCtx = gElCanvas.getContext('2d')
@@ -12,6 +13,7 @@ function onInit() {
   gElCanvas = document.getElementById('my-canvas')
   gCtx = gElCanvas.getContext('2d')
   renderGallery()
+  addListeners()
 }
 
 function renderGallery(images) {
@@ -57,17 +59,17 @@ function renderMeme(img, text = '') {
   gSelectedImg = img
   const meme = new Image()
   meme.src = `meme-imgs-sqr/${img}.jpg`
-  meme.onload = () => {
-    gCtx.drawImage(meme, 0, 0, gElCanvas.width, gElCanvas.height)
-    if (gSelectedSticker) {
-      var sticker = new Image()
-      sticker.src = `img/stickers/${gSelectedSticker}`
-      gCtx.drawImage(sticker, 380, 380, 65, 65)
-    }
-    drawText(gMeme.lines[gMeme.selectedLineIdx].txt)
-    const input = document.getElementById('meme-text')
-    input.placeholder = '' || gMeme.lines[gMeme.selectedLineIdx].txt
+  //  meme.onload = () => {
+  gCtx.drawImage(meme, 0, 0, gElCanvas.width, gElCanvas.height)
+  if (gSelectedSticker) {
+    var sticker = new Image()
+    sticker.src = `img/stickers/${gSelectedSticker}`
+    gCtx.drawImage(sticker, 380, 380, 65, 65)
   }
+  drawText(gMeme.lines[gMeme.selectedLineIdx].txt)
+  const input = document.getElementById('meme-text')
+  input.placeholder = '' || gMeme.lines[gMeme.selectedLineIdx].txt
+  // }
 }
 
 function onTextInput(text) {
@@ -144,6 +146,7 @@ function onFontChange(property, val = 0) {
 
 function onAddLine() {
   addLine()
+  document.getElementById('meme-text').focus()
 }
 
 function onDeleteLine() {
@@ -161,7 +164,7 @@ function getPosition(alignment) {
       posX = gElCanvas.width / 2
       break
     case 'right':
-      posX = gElCanvas.width - 2
+      posX = gElCanvas.width - 10
       break
   }
   return posX
@@ -191,6 +194,7 @@ function onToggleLine() {
     : gMeme.selectedLineIdx++
   input.placeholder = '' || gMeme.lines[gMeme.selectedLineIdx].txt
   renderMeme(gSelectedImg)
+  document.getElementById('meme-text').focus()
 }
 
 function preventRefresh(ev) {
@@ -204,7 +208,7 @@ function drawRect(lineIdx, pos, width, fontSize, align) {
       gCtx.strokeRect(
         alignRect(align, pos, width),
         75,
-        width + 20,
+        width + 2,
         -(fontSize + 20)
       )
       break
@@ -212,7 +216,7 @@ function drawRect(lineIdx, pos, width, fontSize, align) {
       gCtx.strokeRect(
         alignRect(align, pos, width),
         415,
-        width + 20,
+        width + 2,
         -(fontSize + 20)
       )
       break
@@ -220,7 +224,7 @@ function drawRect(lineIdx, pos, width, fontSize, align) {
       gCtx.strokeRect(
         alignRect(align, pos, width),
         240,
-        width + 20,
+        width + 2,
         -(fontSize + 20)
       )
       break
@@ -239,9 +243,92 @@ function onAddSticker(sticker) {
 function onDownloadCanvas(elLink) {
   // todo find a way to asynch it so render will finish before download
   gIsforDownload = true
-  renderMeme(gSelectedImg)
-  const data = gElCanvas.toDataURL()
+  const data = getCanvasToDownload(1)
   elLink.href = data
-  elLink.download = `your-meme.png`
+  elLink.download = `your-meme.jpg`
+
+  // gIsforDownload = false
+  // renderMeme(gSelectedImg)
+}
+
+function test(something) {
+  console.log(something)
+}
+
+// function addListeners() {
+//   addMouseListeners()
+//   addTouchListeners()
+//   //Listen for resize ev
+// }
+
+// function addMouseListeners() {
+//   gElCanvas.addEventListener('mousemove', onMove)
+//   gElCanvas.addEventListener('mousedown', onDown)
+//   gElCanvas.addEventListener('mouseup', onUp)
+// }
+
+// function addTouchListeners() {
+//   gElCanvas.addEventListener('touchmove', onMove)
+//   gElCanvas.addEventListener('touchstart', onDown)
+//   gElCanvas.addEventListener('touchend', onUp)
+// }
+
+// function onDown(ev) {
+//   console.log('Im from onDown')
+//   //Get the ev pos from mouse or touch
+//   const pos = getEvPos(ev)
+//   if (!isCircleClicked(pos)) return
+//    //Save the pos we start from
+//   gStartPos = pos
+//   document.body.style.cursor = 'grabbing'
+
+// }
+
+// function onMove(ev) {
+//   console.log('Im from onMove')
+//   const { isDrag } = getCircle()
+//   if (!isDrag) return
+//   const pos = getEvPos(ev)
+//   //Calc the delta , the diff we moved
+//   const dx = pos.x - gStartPos.x
+//   const dy = pos.y - gStartPos.y
+//   moveCircle(dx, dy)
+//   //Save the last pos , we remember where we`ve been and move accordingly
+//   gStartPos = pos
+//   //The canvas is render again after every move
+//   renderCanvas()
+
+// }
+
+// function onUp() {
+//   console.log('Im from onUp')
+//   setCircleDrag(false)
+//   document.body.style.cursor = 'grab'
+// }
+
+// function getEvPos(ev) {
+
+//   //Gets the offset pos , the default pos
+//   let pos = {
+//     x: ev.offsetX,
+//     y: ev.offsetY
+//   }
+//   // Check if its a touch ev
+//   if (TOUCH_EVS.includes(ev.type)) {
+//     //soo we will not trigger the mouse ev
+//     ev.preventDefault()
+//     //Gets the first touch point
+//     ev = ev.changedTouches[0]
+//     //Calc the right pos according to the touch screen
+//     pos = {
+//       x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+//       y: ev.pageY - ev.target.offsetTop - ev.target.clientTop
+//     }
+//   }
+//   return pos
+// }
+
+function getCanvasToDownload(quality) {
   renderMeme(gSelectedImg)
+  return gElCanvas.toDataURL('image/jpeg', quality)
 }

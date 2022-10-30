@@ -95,9 +95,9 @@ function deleteLine() {
 
 function alignRect(align, pos, width = 50) {
   let posX
-  if (align === 'left') posX = pos
-  else if (align === 'center') posX = pos - width / 2 - 10
-  else if (align === 'right') posX = pos - width
+  if (align === 'left') posX = pos 
+  else if (align === 'center') posX = pos - width / 2 - 2
+  else if (align === 'right') posX = pos - (width)
   return posX
 }
 
