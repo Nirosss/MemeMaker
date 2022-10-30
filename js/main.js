@@ -246,9 +246,8 @@ function onDownloadCanvas(elLink) {
   const data = getCanvasToDownload(1)
   elLink.href = data
   elLink.download = `your-meme.jpg`
-
-  // gIsforDownload = false
-  // renderMeme(gSelectedImg)
+  gIsforDownload = false
+  renderMeme(gSelectedImg)
 }
 
 function test(something) {
@@ -335,7 +334,6 @@ function getCanvasToDownload(quality) {
 
 function onClearSerach() {
   var clearSearch = document.getElementById('image-fliter')
-  clearSearch.value= ''
+  clearSearch.value = ''
   onSearch(clearSearch.value)
 }
-
