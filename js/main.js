@@ -66,7 +66,7 @@ function renderMeme(img, text = '') {
     sticker.src = `img/stickers/${gSelectedSticker}`
     gCtx.drawImage(sticker, 380, 380, 65, 65)
   }
-  drawText(gMeme.lines[gMeme.selectedLineIdx].txt)
+  drawText(gMeme.selectedLineIdx)
   const input = document.getElementById('meme-text')
   input.placeholder = '' || gMeme.lines[gMeme.selectedLineIdx].txt
   // }
@@ -77,68 +77,120 @@ function onTextInput(text) {
   renderMeme(gSelectedImg, updateMeme(text))
 }
 
-function drawText(text) {
-  const { fontSize, font, fillColor, strokeColor, align, underline } =
-    gTextProperties
-  const [line1, line2, line3] = gMeme.lines
-  let text1 = line1.txt
-  let text2 = ''
-  let text3 = ''
-  if (gMeme.lines.length > 1) text2 = line2.txt
-  if (gMeme.lines.length > 2) text3 = line3.txt
-  // there should be a shorter way. todo give each line text prop
+function drawText(idx) {
+  let activeText = gMeme.lines[idx]
+  const {
+    text,
+    fontSize,
+    font,
+    fillColor,
+    strokeColor,
+    align,
+    underline,
+    width,
+  } = activeText
+  gMeme.lines.forEach((line) => {
+    const { text, fontSize, font, fillColor, strokeColor, align, underline } =
+      line
+    drawLine(line, idx)
+  })
+
   gCtx.lineWidth = 2
+  let pos = getPosition(align)
+  if (gIsforDownload) return
+
+  switch (idx) {
+    case 0:
+      drawRect(0, pos - 3, width, align)
+      break
+    case 1:
+      drawRect(1, pos - 3, width, align)
+      break
+    case 2:
+      drawRect(2, pos - 3, width, align)
+      break
+  }
+}
+
+function drawLine(line, idx) {
+  const { txt, fontSize, font, fillColor, strokeColor, align } = line
   gCtx.font = `${fontSize}px ${font}`
   gCtx.strokeStyle = strokeColor
   gCtx.fillStyle = fillColor
-  let { width } = gCtx.measureText(text)
   let pos = getPosition(align)
+  let posY = alignUnderLine(gMeme.lines.indexOf(line))
   gCtx.textAlign = align
-  gCtx.fillText(text1, pos, 60)
-  gCtx.strokeText(text1, pos, 60)
-  gCtx.fillText(text2, pos, 400)
-  gCtx.strokeText(text2, pos, 400)
-  gCtx.fillText(text3, pos, 225)
-  gCtx.strokeText(text3, pos, 225)
-  if (underline) {
-    let posY = alignUnderLine(gMeme.selectedLineIdx)
-    if (align === 'left') gCtx.fillRect(pos, posY, width, 2)
-    else if (align === 'center') gCtx.fillRect(pos - width / 2, posY, width, 2)
-    else if (align === 'right') gCtx.fillRect(pos - width, posY, width, 2)
+  gCtx.fillText(txt, pos, posY)
+  gCtx.strokeText(txt, pos, posY)
+  let { width } = gCtx.measureText(gMeme.lines[idx].txt)
+  gMeme.lines[idx].width = width
+}
+
+function drawRect(idx, pos, width, align) {
+  let fontSize = gMeme.lines[idx].fontSize
+  gCtx.strokeStyle = '#8ca9c5'
+  switch (idx) {
+    case 0:
+      gCtx.strokeRect(
+        alignRect(align, pos, width, fontSize),
+        75,
+        width + fontSize / 3,
+        -(fontSize + 20)
+      )
+      break
+    case 1:
+      gCtx.strokeRect(
+        alignRect(align, pos, width, fontSize),
+        415,
+        width + fontSize / 3,
+        -(fontSize + 20)
+      )
+      break
+    case 2:
+      gCtx.strokeRect(
+        alignRect(align, pos, width, fontSize),
+        240,
+        width + 10,
+        -(fontSize + 20)
+      )
+      break
   }
-  if (gIsforDownload) return
-  drawRect(gMeme.selectedLineIdx, pos, width, fontSize, align)
 }
 
 function onFontChange(property, val = 0) {
+  var activeText = gMeme.lines[gMeme.selectedLineIdx]
   switch (property) {
     case 'fontSize':
-      gTextProperties.fontSize += val
+      activeText.fontSize += val
       renderMeme(gSelectedImg)
       break
     case 'underline':
-      gTextProperties.underline = !gTextProperties.underline
+      activeText.underline = !activeText.underline
       renderMeme(gSelectedImg)
       break
     case 'color':
-      gTextProperties.fillColor = val
+      activeText.fillColor = val
       renderMeme(gSelectedImg)
       break
     case 'left':
-      gTextProperties.align = 'left'
+      activeText.align = 'left'
       renderMeme(gSelectedImg)
       break
     case 'center':
-      gTextProperties.align = 'center'
+      activeText.align = 'center'
       renderMeme(gSelectedImg)
       break
     case 'right':
-      gTextProperties.align = 'right'
+      activeText.align = 'right'
       gMeme.lines[gMeme.selectedLineIdx].align = 'right' // todo Update all changes to line level
       renderMeme(gSelectedImg)
       break
     case 'font':
-      gTextProperties.font = val
+      activeText.font = val
+      renderMeme(gSelectedImg)
+      break
+    case 'strokecolor':
+      activeText.strokeColor = val
       renderMeme(gSelectedImg)
       break
   }
@@ -201,37 +253,8 @@ function preventRefresh(ev) {
   ev.preventDefault()
 }
 
-function drawRect(lineIdx, pos, width, fontSize, align) {
-  gCtx.strokeStyle = '#8ca9c5'
-  switch (lineIdx) {
-    case 0:
-      gCtx.strokeRect(
-        alignRect(align, pos, width),
-        75,
-        width + 2,
-        -(fontSize + 20)
-      )
-      break
-    case 1:
-      gCtx.strokeRect(
-        alignRect(align, pos, width),
-        415,
-        width + 2,
-        -(fontSize + 20)
-      )
-      break
-    case 2:
-      gCtx.strokeRect(
-        alignRect(align, pos, width),
-        240,
-        width + 2,
-        -(fontSize + 20)
-      )
-      break
-  }
-}
-
 function toggleMenu() {
+  if (window.innerWidth > 680) return
   document.body.classList.toggle('menu-open')
 }
 
@@ -333,7 +356,7 @@ function getCanvasToDownload(quality) {
 }
 
 function onClearSerach() {
-  var clearSearch = document.getElementById('image-fliter')
+  var clearSearch = document.getElementById('image-filter')
   clearSearch.value = ''
   onSearch(clearSearch.value)
 }

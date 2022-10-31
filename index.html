@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body onload="onInit()">
+    <div class="main-screen full" onclick="toggleMenu()"></div>
     <header
       class="main-header flex align-center full main-layout space-between align-center"
     >
@@ -15,7 +16,7 @@
         <img src="img/LOGO.png" alt="" />
       </div>
       <div class="main-header-container flex space-between align-center">
-        <nav class="main-nav">
+        <nav class="main-nav" onclick="toggleMenu()">
           <!-- Todo: clean buttons -->
           <button
             class="main-nav-button"
@@ -52,7 +53,7 @@
         <form onsubmit="preventRefresh(event)" class="main-search-input flex">
           <input
             list="img-keyword"
-            id="image-fliter"
+            id="image-filter"
             name="image-slector"
             oninput="onSearch(this.value)"
           />
@@ -80,7 +81,7 @@
             style="background-image: url(img/search.png)"
           ></button>
         </form>
-        <div class="main-search keywords">Keywords will come here</div>
+        <div class="main-search-keywords">Keywords come here</div>
       </section>
       <section class="main-gallery main-layout grid">
         <!-- images come are -->
@@ -163,13 +164,19 @@
               <option value="Times">TIMES</option>
             </select>
             <button
-              class="font-button underline"
-              onclick="onFontChange('underline')"
+              class="font-button colorpicker-container"
               style="background: url(img/underline.png)"
-            ></button>
+            >
+              <input
+                class="font-button colorpicker"
+                type="color"
+                oninput="onFontChange('strokecolor',this.value)"
+                value="#ffffff"
+              />
+            </button>
             <button
               class="font-button colorpicker-container"
-              style="background-image: url(/img/colorpicker.png)"
+              style="background-image: url(img/colorpicker.png)"
             >
               <input
                 class="font-button colorpicker"

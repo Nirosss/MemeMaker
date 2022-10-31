@@ -1,13 +1,5 @@
 'use strict'
 var gfilter
-var gTextProperties = {
-  fontSize: 40,
-  font: 'Impact',
-  fillColor: '#ffffff',
-  strokeColor: '#000000',
-  align: 'center',
-  underline: false,
-}
 
 var gKeywordSearchCountMap = {
   funny: 12,
@@ -48,10 +40,12 @@ var gMeme = {
   lines: [
     {
       txt: 'I sometimes eat Falafel',
-      size: gTextProperties.fontSize,
-      align: gTextProperties.align,
-      color: gTextProperties.fillColor,
-      underline: gTextProperties.underline,
+      fontSize: 40,
+      font: 'Impact',
+      fillColor: '#ffffff',
+      strokeColor: '#000000',
+      align: 'center',
+      underline: false,
     },
   ],
 }
@@ -78,9 +72,12 @@ function addLine() {
   gMeme.selectedLineIdx++
   gMeme.lines.push({
     txt: 'Your text here',
-    size: gTextProperties.fontSize,
-    align: gTextProperties.align,
-    color: gTextProperties.fillColor,
+    fontSize: 40,
+    font: 'Impact',
+    fillColor: '#ffffff',
+    strokeColor: '#000000',
+    align: 'center',
+    underline: false,
   })
   // const input = document.getElementById('meme-text')
 
@@ -93,11 +90,11 @@ function deleteLine() {
   gMeme.lines[gMeme.selectedLineIdx].txt = ''
 }
 
-function alignRect(align, pos, width = 50) {
+function alignRect(align, pos, width = 200, fontSize) {
   let posX
-  if (align === 'left') posX = pos 
-  else if (align === 'center') posX = pos - width / 2 - 2
-  else if (align === 'right') posX = pos - (width)
+  if (align === 'left') posX = pos + 3
+  else if (align === 'center') posX = pos - width / 2 - fontSize / 12
+  else if (align === 'right') posX = pos - width
   return posX
 }
 
