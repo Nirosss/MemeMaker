@@ -428,7 +428,7 @@ body.menu-open .main-screen {
   }
 
   #image-filter {
-    width: 280px;
+    width: 200px;
   }
 
   body.menu-open .main-nav {
@@ -472,7 +472,7 @@ body.menu-open .main-screen {
     height: 108px;
   }
   .main-search-keywords {
-    width: 400px;
+    width: 300px;
     height: 41.14px;
   }
 }
