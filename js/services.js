@@ -57,7 +57,8 @@ function updateMeme(text) {
 }
 
 function resetTextProp() {
-  gTextProperties = {
+  gMeme.lines[0] = {
+    txt: 'Jidaskyu',
     fontSize: 40,
     font: 'Impact',
     fillColor: '#ffffff',
@@ -65,6 +66,8 @@ function resetTextProp() {
     align: 'center',
     underline: false,
   }
+  if (gMeme.lines.length > 1) gMeme.lines.splice(1, gMeme.lines.length - 1)
+  gMeme.selectedLineIdx = 0
 }
 
 function addLine() {
